@@ -1,0 +1,17 @@
+.filters-list {
+    margin-bottom: 40px;
+}
+
+.filters-list__title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.filters-list__btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

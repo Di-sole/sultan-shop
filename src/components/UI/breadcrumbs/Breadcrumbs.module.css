@@ -1,0 +1,29 @@
+.breadcrumbs {
+    padding: 45px 0 50px 0;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    flex-direction: row;
+    font-weight: 300;
+    line-height: 120%;
+}
+
+.breadcrumbs__list:first-child {
+    opacity: 1;
+}
+
+.breadcrumbs__list li {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px dashed rgba(63, 78, 101, 0.3);
+    opacity: 0.5;
+}
+
+.breadcrumbs__list li:last-child {
+    border: none;
+}
+
+.breadcrumbs__list li:hover {
+    cursor: pointer;
+}

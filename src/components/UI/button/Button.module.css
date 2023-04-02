@@ -1,0 +1,43 @@
+.btn {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    background-color: #FFC85E;
+    border-radius: 80px;
+}
+
+.btn:hover {
+    background-color: #c7942e;
+}
+
+.btn:active {
+    background-color: #ffb31c;
+}
+
+.big {
+    padding: 20px 51px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.medium {
+    padding: 17px 25px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.circular {
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.circular_input {
+    position: absolute;
+    top: 9px;
+    left: 195px;
+    padding: 10px;
+    border-radius: 50%;
+}

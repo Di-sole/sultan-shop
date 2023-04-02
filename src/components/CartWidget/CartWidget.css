@@ -1,0 +1,40 @@
+.cart-widget {
+    display: flex;
+    flex-direction: row;
+}
+
+.cart-widget:hover {
+    cursor: pointer;
+}
+
+.cart-widget__image {
+    position: relative;
+    margin-right: 25px;
+}
+
+.cart-widget__count {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: -7px;
+    left: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+    color: #fff;
+    background-color: #ffc85e;
+    border-radius: 50%;
+}
+
+.cart-widget__total {
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.light-gray {
+    font-size: 12px;
+    font-weight: 300;
+    color: #3f4e65;
+}

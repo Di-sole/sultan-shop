@@ -1,0 +1,22 @@
+.bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.count_btn {
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 300;
+    color: #3F4E65;
+    text-align: center;
+    border-radius: 30px;
+    background-color: rgba(255, 198, 80, 0.3);
+}
+
+.value {
+    padding: 0 20px;
+    font-weight: 500;
+    color: #3F4E65;
+}

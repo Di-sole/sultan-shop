@@ -1,0 +1,85 @@
+.footer li {
+    margin-bottom: 20px;
+    line-height: 150%;
+    color: #fff;
+}
+
+.footer {
+    padding: 70px 0;
+    background-color: #3F4E65;
+    color: #fff;
+}
+
+.footer__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sultan__info {
+    width: 320px;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.logo__footer {
+    margin-bottom: 15px;
+}
+
+.sultan__description {
+    margin-bottom: 45px;
+}
+
+.sultan__info label {
+    font-size: 12px;
+}
+
+.navigation__title,
+.sections__title,
+.pricelist-link__title,
+.contacts__title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 150%;
+}
+
+.contact__info {
+    font-weight: 600;
+    line-height: 130%;
+}
+
+.contact__info_light {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.pricelist-link {
+    margin-bottom: 20px;
+}
+
+.messegers-link__title {
+    margin-bottom: 15px;
+}
+
+.messegers-link__list,
+.credits__list {
+    display: flex;
+    font-display: row;
+}
+
+.messegers-link__list li {
+    margin-right: 10px;
+}
+
+.contacts__list_footer {
+    margin-bottom: 25px;
+}
+
+.credits__list li {
+    margin-right: 5px;
+}
+
+ul li:last-child {
+    margin: 0px;
+}

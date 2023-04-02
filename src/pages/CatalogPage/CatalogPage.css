@@ -1,0 +1,10 @@
+.page-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wrapper_filters {
+    margin-right: 100px;
+}

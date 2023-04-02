@@ -1,0 +1,32 @@
+.categories li:hover {
+    cursor: pointer;
+}
+
+.categories_top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 11px;
+}
+
+.categories_top li {
+    padding: 13px 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #3f4e65;
+}
+
+.categories_aside li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 150%;
+    color: #3f4e65;
+}
+
+.categories__title {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}

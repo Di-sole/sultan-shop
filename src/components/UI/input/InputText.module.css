@@ -1,0 +1,20 @@
+.input__wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input {
+  width: 240px;
+  padding: 20px 10px 20px 20px;
+  border-radius: 36px;
+  font-size: 12px;
+  color: #3f4e65;
+  background-color: #EDEDED;
+}
+
+.arrow {
+  margin-right: 3px;
+  margin-left: 4px;
+}

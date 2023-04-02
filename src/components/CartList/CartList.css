@@ -1,0 +1,16 @@
+.cart-list__products {
+    margin-bottom: 50px;
+    border-top: 1px dotted rgba(63, 78, 101, 0.3);
+}
+
+.cart-list__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cart__total {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 130%;
+}
