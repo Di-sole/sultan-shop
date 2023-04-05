@@ -22,7 +22,7 @@ export const CartPage: React.FC = () => {
             <div className="container">
                 <PageHeader 
                     title="Корзина"
-                    pathes={[{name: "Корзина", link: "/sultan-shop/cart"}]}
+                    pathes={[{name: "Каталог", link: "/sultan-shop/"}, {name: "Корзина", link: "/sultan-shop/cart"}]}
                 />
                 {products.length > 0 
                     ? <CartList products={products} handleConfirm={handleConfirm} />

@@ -41,3 +41,24 @@
     padding: 10px;
     border-radius: 50%;
 }
+
+@media (max-width: 992px) {
+    .big {
+        padding: 15px 40px;
+    }
+    .medium {
+        padding: 10px 15px;
+    }
+    .circular {
+        padding: 15px;
+        border-radius: 50%;
+    }
+    .circular_input {
+        top: 6px;
+        left: 155px;
+    }
+}
+
+@media (max-width: 550px) {
+
+}

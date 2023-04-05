@@ -10,7 +10,9 @@
     color: #fff;
 }
 
-.footer__row {
+.footer__row,
+.wrapper_footer-contacts,
+.wrapper_footer-lists {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -82,4 +84,63 @@
 
 ul li:last-child {
     margin: 0px;
+}
+
+.wrapper_footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+}
+
+.wrapper_footer-contacts,
+.wrapper_footer-lists {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+}
+
+@media (max-width: 992px) {
+    .footer {
+        font-size: 12px;
+    }
+    .footer li {
+        margin-bottom: 10px;
+        line-height: 120%;
+    }
+    .sultan__info {
+        width: 260px;
+        font-size: 14px;
+        line-height: 120%;
+    }
+    .navigation__title,
+    .sections__title,
+    .pricelist-link__title,
+    .contacts__title {
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+    .wrapper_footer-content {
+        flex-direction: column;
+    }
+
+    .wrapper_footer-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 70%;
+    }
+
+    .wrapper_footer-contacts,
+    .wrapper_footer-lists {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .wrapper_footer-lists {
+        margin-bottom: 40px;
+    }
 }

@@ -20,3 +20,9 @@
     font-weight: 500;
     color: #3F4E65;
 }
+
+@media (max-width: 992px) {
+    .value {
+        padding: 0 10px;
+    }
+}

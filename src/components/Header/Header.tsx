@@ -62,10 +62,12 @@ export const Header = () => {
                         </div>
                         <img className="contact__img" src={manager} alt="img" />
                     </div>    
+                    <div className="wrapper_btn-top">
                     <Button shape="big">
                         Прайс-лист
                         <img src={download} alt="" style={{marginLeft: "12px"}} />
                     </Button>
+                    </div>
                     <CartWidget />
                 </div>
             </div>

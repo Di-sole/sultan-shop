@@ -38,3 +38,12 @@
 .category__current {
     font-weight: 700;
 }
+
+@media (max-width: 992px) {
+    .categories_top li {
+        padding: 13px 15px;
+        text-align: center;
+        font-size: 12px;
+        color: #3f4e65;
+    }
+}
