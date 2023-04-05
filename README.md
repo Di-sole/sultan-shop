@@ -1,3 +1,3 @@
 ### Интернет-магазин Sultan
 
-[GitHub Pages](https://di-sole.github.io/sultan-shop/) 
+[GitHub Pages](https://di-sole.github.io/sultan-shop/sultan-shop/) 
