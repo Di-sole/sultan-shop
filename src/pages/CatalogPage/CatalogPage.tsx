@@ -62,7 +62,7 @@ export const CatalogPage: React.FC = () => {
     return (
         <main>
             <div className="container">
-                <PageHeader title="каталог" pathes={[{name: "Каталог", link: "/"}]}>
+                <PageHeader title="каталог" pathes={[{name: "Каталог", link: "/sultan-shop/"}]}>
                     <SelectSorting 
                         defaultValue="Название"
                         onChange={handleSortChange}

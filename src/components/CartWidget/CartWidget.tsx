@@ -8,7 +8,7 @@ export const CartWidget = () => {
     const count = useTypedSelector(state => state.cart.selectedProducts).length;
 
     return (
-        <NavLink to="/cart">
+        <NavLink to="/sultan-shop/cart">
             <div className="cart-widget">
                 <div className="cart-widget__image">
                     <img src={cart_dark} alt="" />

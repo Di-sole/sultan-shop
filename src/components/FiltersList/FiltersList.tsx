@@ -9,11 +9,7 @@ import { useState } from "react";
 
 export const FiltersList: React.FC = () => {
     const manufacturers = useTypedSelector(state => state.products.manufacturers);
-    const {
-        selectedMinPrice,
-        selectedMaxPrice,
-        selectedParams
-    } = useTypedSelector(state => state.filter);
+    const {selectedMinPrice, selectedMaxPrice, selectedParams} = useTypedSelector(state => state.filter);
     const {
         FilterBySeveralFilters, 
         setMaxPrice, 
@@ -23,7 +19,14 @@ export const FiltersList: React.FC = () => {
         resetProductsList
     } = useAction();
 
-    const [inputValues, setInputValues] = useState({min: '', max: '', search: ''})
+    const [inputValues, setInputValues] = useState({min: '', max: '', search: ''});
+    const [filtredValues, setFiltredValues] = useState(manufacturers);
+
+    const handleSearchParams = () => {
+        const filtred = filtredValues
+            .filter(val => val.toLowerCase().includes(inputValues.search.toLowerCase()));
+        setFiltredValues(filtred);
+    }
 
     const handleCheckboxChange = (e: any) => {
         setSelectedParams(e.target.value);
@@ -40,13 +43,11 @@ export const FiltersList: React.FC = () => {
         }
     }
 
-    const handleSearchInputChange = (e: any) => {
+    const handleInputChange = (e: any) => {
         setInputValues(prev => ({...prev, search: e.target.value}));
     }
 
-    const handleSubmitFilter = (e: any) => {
-        e.preventDefault();
-
+    const handleSubmitFilter = () => {
         FilterBySeveralFilters({
             minPrice: selectedMinPrice,
             maxPrice: selectedMaxPrice,
@@ -54,12 +55,11 @@ export const FiltersList: React.FC = () => {
         });
     }
 
-    const handleClearFilter = (e: any) => {
-        e.preventDefault();
-
+    const handleClearFilter = () => {
         clearFilter();
         resetProductsList();
         setInputValues({min: '', max: '', search: ''});
+        setFiltredValues(manufacturers);
     }
 
     return (
@@ -74,11 +74,12 @@ export const FiltersList: React.FC = () => {
 
             <FilterByParams
                 title="Производитель" 
-                paramValues={manufacturers} 
+                paramValues={filtredValues} 
                 selectedParams={selectedParams}
                 searchQuery={inputValues.search}
-                handleSearchInputChange={handleSearchInputChange}
+                handleInputChange={handleInputChange}
                 handleCheckboxChange={handleCheckboxChange}
+                handleSearch={handleSearchParams}
             />
 
             <div className="filters-list__btns">

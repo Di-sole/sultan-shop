@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { InputText } from "../UI/input/InputText";
 import { Checkboxes } from "../UI/Checkboxes/Checkboxes";
 import './FilterByParams.css';
@@ -9,17 +8,20 @@ interface FilterByParamsProps {
     selectedParams: string[],
     searchQuery: string,
     handleCheckboxChange: Function,
-    handleSearchInputChange: Function
+    handleInputChange: Function,
+    handleSearch: Function
 }
 
-export const FilterByParams: React.FC<FilterByParamsProps> = ({title, paramValues, selectedParams, searchQuery, handleCheckboxChange, handleSearchInputChange}) => {
-    const [filtredValues, setFiltredValues] = useState([]);
-
-    const handleSearch = () => {
-        const filtred = paramValues
-            .filter(val => val.toLowerCase().includes(searchQuery.toLowerCase()));
-        setFiltredValues(filtred);
-    }
+export const FilterByParams: React.FC<FilterByParamsProps> = (props) => {
+    const {
+        title, 
+        paramValues, 
+        selectedParams, 
+        searchQuery, 
+        handleCheckboxChange, 
+        handleInputChange,
+        handleSearch
+    } = props
 
     return (
         <div className="params-filter">
@@ -31,13 +33,11 @@ export const FilterByParams: React.FC<FilterByParamsProps> = ({title, paramValue
                     imgType="search" 
                     value={searchQuery}
                     handleClick={handleSearch}
-                    handleChange={handleSearchInputChange}
+                    handleChange={handleInputChange}
                 />
 
                 <Checkboxes 
-                    values={filtredValues.length > 0
-                        ? filtredValues 
-                        : paramValues}
+                    values={paramValues}
                     valuesName="param"
                     selected={selectedParams}
                     handleChange={handleCheckboxChange}

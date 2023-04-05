@@ -12,8 +12,8 @@ export const ProductCardPage: React.FC = () => {
         <main>
             <div className="container">
                 <PageHeader pathes={[
-                    {name: "Каталог", link: "/"}, 
-                    {name: `${product.name}`, link: `/product/${barcode}`}
+                    {name: "Каталог", link: "/sultan-shop/"}, 
+                    {name: `${product.name}`, link: `/sultan-shop/product/${barcode}`}
                 ]}/>
                 <ProductCard product={product} />
             </div>

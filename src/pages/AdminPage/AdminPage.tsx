@@ -1,30 +1,83 @@
+import { Checkboxes } from "../../components/UI/Checkboxes/Checkboxes";
 import { Breadcrumbs } from "../../components/UI/breadcrumbs/Breadcrumbs";
-import json from "../../json";
 import { IProduct } from "../../types/types";
+import json from "../../json";
 import './AdminPage.css';
+import { Modal } from "../../components/UI/Modal/Modal";
+import { useState } from "react";
+import { AdminButton } from "../../components/UI/button/AdminButton";
+import { AdminForm } from "../../components/admin/AdminForm/AdminForm";
 
 export const AdminPage = () => {
-    const products: IProduct[] = JSON.parse(json);
+    const products: IProduct[] = localStorage.length == 0 ? JSON.parse(json) : JSON.parse(localStorage.products);
+    if (localStorage.length === 0) localStorage.products = JSON.stringify(products);
+
+    const [modalEdit, setModalEdit] = useState(false);
+    const [modalAdd, setModalAdd] = useState(false);
+    const [editedProduct, setEditedProduct] = useState(null);
+    // const [currentList, setCurrentList] = useState(products);
 
     const handleEdit = (product: IProduct) => {
-
+        setEditedProduct(product);
+        setModalEdit(true);
     }
 
     const handleDelete = (product: IProduct) => {
+        const removed = products.find(p => p.barcode == product.barcode);
+        const newState = products.filter(p => p != removed);
+        localStorage.products = JSON.stringify(newState);
+        // setCurrentList(JSON.parse(localStorage.products));
+    }
+
+    const handleCheckboxChange = () => {
 
     }
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
+
+        const form = e.target.form
+        const newProduct: IProduct = {
+            id: form.barcode.value,
+            name: form.title.value,
+            img: form.img_url.value,
+            size_type: form.size_type.value,
+            size: form.size.value,
+            barcode: form.barcode.value,
+            manufacturer: form.manufacturer.value,
+            brand: form.brand.value,
+            description: form.description.value,
+            price: form.price.value,
+            category: form.category.value
+        }
+
+        const newState = [...products];
+        newState.push(newProduct);
+        localStorage.products = JSON.stringify(newState);
+
+        closeModals();
+    }
+
+    const handleCancel = () => {
+        closeModals();
+    }
+
+    const closeModals = () => {
+        setModalAdd(false);
+        setModalEdit(false);
     }
 
     return (
         <main>
             <div className="container">
-                <Breadcrumbs pathes={[{name: "Каталог", link: "/"}]} />
+                <Breadcrumbs pathes={[{name: "Каталог", link: "/sultan-shop/"}]} />
                 <div className="admin-page__content">
                     <div className="admin__products">
-                        <h2 className="admin__list-title">Список товаров</h2>
+                        <div className="admin__header">
+                            <h2 className="admin__list-title">Список товаров</h2>
+                            <AdminButton onClick={() => {setModalAdd(true)}}>Добавить товар</AdminButton>
+                        </div>
+                        
                         <ul className="admin__list">
                             {products.map(prod => 
                                 <li key={prod.barcode}>
@@ -32,93 +85,37 @@ export const AdminPage = () => {
                                         <img className="admin__product-image" src={prod.img} alt="img"/>
                                         <h3 className="admin__product-title">{prod.name}</h3>
                                         <div className="admin__product-actions">
-                                            <button 
-                                                className="admin__btn admin__btn_edit"
-                                                type="button"
-                                                onClick={() => handleEdit(prod)}
-                                            >
+                                            <AdminButton onClick={handleEdit}>
                                                 Редактировать
-                                            </button>
-                                            <button 
-                                                className="admin__btn admin__btn_delete"
-                                                type="button"
-                                                onClick={() => handleDelete(prod)}
-                                            >
+                                            </AdminButton>
+                                            <AdminButton onClick={handleDelete}>
                                                 Удалить
-                                            </button>
+                                            </AdminButton>
                                         </div>
                                     </div>
                                 </li>
                             )}
                         </ul>
                     </div>
-
-                    <div className="admin__product-add">
-                        <h2 className="admin__form-title">Добавить товар</h2>
-                        <form className="admin__form">
-                            <label>
-                                <span>Название товара</span>
-                                <input type="text" />
-                            </label>
-                            <label>
-                                <span>URL изображения</span>
-                                <input type="text" />
-                            </label>
-                            <label>
-                                <span>Штрихкод</span>
-                                <input type="number" />
-                            </label>
-                            <label className="label_select">
-                                <span>Тип объема</span>
-                                <select name="size_type" id="size_type">
-                                    <option value="г">грамм</option>
-                                    <option value="мл">миллилитр</option>
-                                </select>
-                            </label>
-                            <label>
-                                <span>Объем</span>
-                                <input type="number" />
-                            </label>
-                            <label>
-                                <span>Производитель</span>
-                                <input type="text" />
-                            </label>
-                            <label>
-                                <span>Бренд</span>
-                                <input type="text" />
-                            </label>
-                            <label>
-                                <span>Описание</span>
-                                <textarea name="description" id="description" rows={1}></textarea>
-                            </label>
-                            <label>
-                                <span>Цена</span>
-                                <input type="number" />
-                            </label>
-                            <label className="label_select">
-                                <span>Категория</span>
-                                <select name="category" id="category">
-                                    <option value="Кремы, лосьоны, масла">Кремы, лосьоны, масла</option>
-                                    <option value="Эпиляция и депиляция">Эпиляция и депиляция</option>
-                                    <option value="Средства для ванны и душа">Средства для ванны и душа</option>
-                                    <option value="Гели для душа">Гели для душа</option>
-                                    <option value="Скрабы, пилинги">Скрабы, пилинги</option>
-                                    <option value="Мочалки и губки для тела">Мочалки и губки для тела</option>
-                                    <option value="Интимный уход">Интимный уход</option>
-                                    <option value="Дезодоранты, антиперспиранты">Дезодоранты, антиперспиранты</option>
-                                </select>
-                            </label>
-                            <button
-                                className="admin__btn admin__btn_delete"
-                                type="button"
-                                onClick={(e) => handleSubmit(e)}
-                            >
-                                Добавить товар
-                            </button>
-                        </form>
-                    </div>
                 </div>
             </div>
+
+            <Modal visible={modalAdd} setVisible={setModalAdd}>
+                <AdminForm 
+                    product={null}
+                    formType="add"
+                    handleSubmit={handleSubmit}
+                    handleCancel={handleCancel} 
+                />
+            </Modal>
+            <Modal visible={modalEdit} setVisible={setModalEdit}>
+                <AdminForm 
+                    product={editedProduct}
+                    formType="edit"
+                    handleSubmit={handleSubmit}
+                    handleCancel={handleCancel} 
+                />
+            </Modal>
         </main>
     )
 }

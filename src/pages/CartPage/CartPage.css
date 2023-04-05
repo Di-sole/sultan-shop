@@ -1,0 +1,19 @@
+.thanks-message {
+    padding: 140px 110px;
+    text-align: center;
+}
+
+.thanks-message__title {
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+
+.thanks-message__content {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 120%;
+    color: #3F4E65;
+}

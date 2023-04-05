@@ -15,7 +15,7 @@ export const ProductsListItem: React.FC<ProductsListItemProps> = ({product, hand
             <img className="product__image" src={product.img} alt="img"/>
             <div className="product__header">
                 <span className="product__size">{product.size} {product.size_type}</span>
-                <NavLink to={"/product/" + product.barcode}>
+                <NavLink to={"/sultan-shop/product/" + product.barcode}>
                     <h3 className="product__title">{product.name}</h3>
                 </NavLink>
             </div>

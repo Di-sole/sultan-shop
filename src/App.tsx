@@ -13,10 +13,10 @@ function App() {
       <Header />
 
       <Routes>
-          <Route path="/" element={<CatalogPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/product/:barcode" element={<ProductCardPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/sultan-shop" element={<CatalogPage />} />
+          <Route path="/sultan-shop/cart" element={<CartPage />} />
+          <Route path="/sultan-shop/product/:barcode" element={<ProductCardPage />} />
+          <Route path="/sultan-shop/admin" element={<AdminPage />} />
       </Routes>
       
       <Footer />

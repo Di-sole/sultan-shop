@@ -1,0 +1,12 @@
+.admin__btn {
+    width: 120px;
+    padding: 5px 8px;
+    color: #3f4e65;
+    text-align: center;
+    background-color: rgba(255, 198, 80, 0.3);
+}
+
+.admin__btn:hover {
+    font-weight: 500;
+    background-color: rgba(255, 198, 80, 0.5);
+}
