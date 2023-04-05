@@ -2,7 +2,7 @@ import json from '../../json';
 import { ProductsAction, ProductsActionTypes, ProductsState } from '../../types/products';
 import { sortProducts, getParamValues, filterProducts } from '../../utils/utils';
 
-const products = localStorage.length == 0 ? JSON.parse(json) : JSON.parse(localStorage.products);
+const products = JSON.parse(json);
 const manufacturers = getParamValues(products, 'manufacturer');
 const categories = getParamValues(products, 'category');
 
