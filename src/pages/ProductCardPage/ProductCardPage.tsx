@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
-import { IProduct } from "../../types/types";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-interface ProductCardPageProps {
-    product: IProduct
-}
-
-export const ProductCardPage: React.FC<ProductCardPageProps> = ({product}) => {
-    const {barcode} = useParams();
+export const ProductCardPage: React.FC = () => {
+    const { barcode } = useParams();
+    const { products } = useTypedSelector(state => state.products);
+    const product = products.find(p => p.barcode === barcode);
     
     return (
         <main>

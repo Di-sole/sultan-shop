@@ -1,4 +1,3 @@
-import { Dispatch } from "redux"
 import { FilterAction, FilterActionTypes } from "../../types/filter"
 
 export const setSelectedType = (payload: string): FilterAction => {

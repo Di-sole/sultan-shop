@@ -30,3 +30,11 @@
     font-weight: 500;
     text-transform: uppercase;
 }
+
+.categories__title:hover {
+    cursor: pointer;
+}
+
+.category__current {
+    font-weight: 700;
+}

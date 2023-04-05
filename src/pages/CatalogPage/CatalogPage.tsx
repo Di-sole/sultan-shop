@@ -1,5 +1,5 @@
 import { PageHeader } from "../../components/PageHeader/PageHeader";
-import { SelectSort } from "../../components/UI/select/SelectSort";
+import { SelectSorting } from "../../components/UI/select/SelectSorting";
 import { ProductsList } from "../../components/ProductsList/ProductsList";
 import { FiltersList } from "../../components/FiltersList/FiltersList";
 import { CategoriesList } from "../../components/CategoriesList/CategoriesList";
@@ -9,15 +9,21 @@ import { IProduct } from "../../types/types";
 import './CatalogPage.css';
 
 export const CatalogPage: React.FC = () => {
-    const filtredAndSortedProducts = useTypedSelector(state => state.products.filtredAndSortedProducts);
-    const selectedProducts = useTypedSelector(state => state.cart.selectedProducts);
-    const categories = useTypedSelector(state => state.products.categories);
-    const selectedSort = useTypedSelector(state => state.sort.selectedSort);
+    const {selectedProducts} = useTypedSelector(state => state.cart);
+    const {selectedType} = useTypedSelector(state => state.filter);
+    const {
+        filtredAndSortedProducts, 
+        categories,
+        productsLimit, 
+        currentPage
+    } = useTypedSelector(state => state.products);
     const {
         setSelectedSort, 
         setSelectedType, 
+        clearFilter,
         sortProducts, 
         filterProducts, 
+        resetProductsList,
         addToCart, 
         increaseCount
     } = useAction();
@@ -33,6 +39,11 @@ export const CatalogPage: React.FC = () => {
             filter: e.target.textContent, 
             filterType: 'category'
         });
+    }
+
+    const handleCategoryTitleClick = () => {
+        clearFilter();
+        resetProductsList();
     }
 
     const handleAdd = (product: IProduct) => {
@@ -52,8 +63,7 @@ export const CatalogPage: React.FC = () => {
         <main>
             <div className="container">
                 <PageHeader title="каталог" pathes={[{name: "Каталог", link: "/"}]}>
-                    <SelectSort 
-                        value={selectedSort}
+                    <SelectSorting 
                         defaultValue="Название"
                         onChange={handleSortChange}
                         options={[
@@ -68,6 +78,7 @@ export const CatalogPage: React.FC = () => {
                 <CategoriesList 
                     listType="top"
                     categories={categories}
+                    selectedType={selectedType}
                     handleClick={handleCategoryClick}
                 />
 
@@ -77,11 +88,17 @@ export const CatalogPage: React.FC = () => {
                         <CategoriesList 
                             listType="aside"
                             categories={categories}
+                            selectedType={selectedType}
                             handleClick={handleCategoryClick}
                             title="Уход за телом" 
+                            handleTitleClick={handleCategoryTitleClick}
                         />
                     </div>
-                    <ProductsList products={filtredAndSortedProducts} handleAdd={handleAdd}/>
+                    <ProductsList 
+                        products={filtredAndSortedProducts} 
+                        productsLimit={productsLimit}
+                        page={currentPage}
+                        handleAdd={handleAdd}/>
                 </div>
             </div>    
         </main>

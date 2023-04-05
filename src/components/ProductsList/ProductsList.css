@@ -1,4 +1,5 @@
 .products-list {
+    margin-bottom: 40px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

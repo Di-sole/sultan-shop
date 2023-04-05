@@ -8,6 +8,8 @@ export function sortingReducer(state = initialState, action: SortingAction): Sor
     switch (action.type) {
         case SortingActionTypes.SET_SELECTED_SORT:
             return {...state, selectedSort: action.payload}
+        case SortingActionTypes.CLEAR_SORTING:
+            return {selectedSort: ''}
         default:
             return state
     }

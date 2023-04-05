@@ -5,20 +5,25 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useAction } from "../../hooks/useActions";
 import icon_del from "../../img/icons/icon_clear.svg";
 import './FiltersList.css';
+import { useState } from "react";
 
 export const FiltersList: React.FC = () => {
     const manufacturers = useTypedSelector(state => state.products.manufacturers);
-    const minPrice = useTypedSelector(state => state.filter.selectedMinPrice);
-    const maxPrice = useTypedSelector(state => state.filter.selectedMaxPrice);
-    const selectedParams = useTypedSelector(state => state.filter.selectedParams);
     const {
-        filterProducts, 
+        selectedMinPrice,
+        selectedMaxPrice,
+        selectedParams
+    } = useTypedSelector(state => state.filter);
+    const {
+        FilterBySeveralFilters, 
         setMaxPrice, 
         setMinPrice, 
         setSelectedParams, 
         clearFilter, 
         resetProductsList
     } = useAction();
+
+    const [inputValues, setInputValues] = useState({min: '', max: '', search: ''})
 
     const handleCheckboxChange = (e: any) => {
         setSelectedParams(e.target.value);
@@ -27,28 +32,26 @@ export const FiltersList: React.FC = () => {
     const handlePriceChange = (e: any) => {
         if (e.target.name === 'minPrice') {
             setMinPrice(e.target.value);
+            setInputValues(prev => ({...prev, min: e.target.value}));
         }
         if (e.target.name === 'maxPrice') {
             setMaxPrice(e.target.value);
+            setInputValues(prev => ({...prev, max: e.target.value}));
         }
     }
 
-    const handleSearch = () => {}
+    const handleSearchInputChange = (e: any) => {
+        setInputValues(prev => ({...prev, search: e.target.value}));
+    }
 
     const handleSubmitFilter = (e: any) => {
         e.preventDefault();
-        
-        // if (minPrice) {
-        //     filterProducts({filter: minPrice, filterType: 'min-price'});
-        // }
 
-        // if (maxPrice) {
-        //     filterProducts({filter: maxPrice, filterType: 'max-price'});
-        // }
-
-        // if (selectedParams.length != 0) {
-        //     filterProducts({filter: selectedParams, filterType: 'manufacturer'});    
-        // }
+        FilterBySeveralFilters({
+            minPrice: selectedMinPrice,
+            maxPrice: selectedMaxPrice,
+            params: selectedParams
+        });
     }
 
     const handleClearFilter = (e: any) => {
@@ -56,17 +59,25 @@ export const FiltersList: React.FC = () => {
 
         clearFilter();
         resetProductsList();
+        setInputValues({min: '', max: '', search: ''});
     }
 
     return (
         <div className="filters-list">
             <h2 className="filters-list__title">подбор по параметрам</h2>
 
-            <FilterByPrice onChange={handlePriceChange} />
+            <FilterByPrice 
+                onChange={handlePriceChange} 
+                minPriceValue={inputValues.min}
+                maxPriceValue={inputValues.max}
+            />
 
             <FilterByParams
                 title="Производитель" 
                 paramValues={manufacturers} 
+                selectedParams={selectedParams}
+                searchQuery={inputValues.search}
+                handleSearchInputChange={handleSearchInputChange}
                 handleCheckboxChange={handleCheckboxChange}
             />
 

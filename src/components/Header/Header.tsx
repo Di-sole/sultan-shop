@@ -53,7 +53,6 @@ export const Header = () => {
                     <InputText 
                         placeholder="Поиск..." 
                         imgType="search" 
-                        onChange={() => console.log('typing')}
                         disabled />
                     <div className="contact">
                         <div className="contact__info contact__info_reverse">

@@ -1,43 +1,48 @@
 import { useState } from "react";
 import { InputText } from "../UI/input/InputText";
+import { Checkboxes } from "../UI/Checkboxes/Checkboxes";
 import './FilterByParams.css';
 
 interface FilterByParamsProps {
     title: string, 
-    paramValues: string[], 
-    handleCheckboxChange: Function
+    paramValues: string[],
+    selectedParams: string[],
+    searchQuery: string,
+    handleCheckboxChange: Function,
+    handleSearchInputChange: Function
 }
 
-export const FilterByParams: React.FC<FilterByParamsProps> = ({title, paramValues, handleCheckboxChange}) => {
-    const [searchQuery, setSearchQuery] = useState('');
+export const FilterByParams: React.FC<FilterByParamsProps> = ({title, paramValues, selectedParams, searchQuery, handleCheckboxChange, handleSearchInputChange}) => {
+    const [filtredValues, setFiltredValues] = useState([]);
+
+    const handleSearch = () => {
+        const filtred = paramValues
+            .filter(val => val.toLowerCase().includes(searchQuery.toLowerCase()));
+        setFiltredValues(filtred);
+    }
 
     return (
         <div className="params-filter">
             <h3 className="params-filter__title">{title}</h3>
 
-            <form className="params-filter__form" name="params">
+            <div className="params-filter__wrapper">
                 <InputText 
                     placeholder="Поиск..."
                     imgType="search" 
                     value={searchQuery}
-                    onChange={setSearchQuery} 
+                    handleClick={handleSearch}
+                    handleChange={handleSearchInputChange}
                 />
 
-                <div className="wrapper_checkboxes">
-                    {paramValues.map(val =>
-                        <label key={val}>
-                            <input 
-                                type="checkbox"
-                                name="param"
-                                value={val}
-                                // checked={false}
-                                onChange={(e) => handleCheckboxChange(e)}
-                            />
-                            <span>{val}</span> 
-                        </label>
-                    )}
-                </div>        
-            </form>
+                <Checkboxes 
+                    values={filtredValues.length > 0
+                        ? filtredValues 
+                        : paramValues}
+                    valuesName="param"
+                    selected={selectedParams}
+                    handleChange={handleCheckboxChange}
+                />    
+            </div>
         </div>
     )
 }

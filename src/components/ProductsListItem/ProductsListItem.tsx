@@ -1,16 +1,15 @@
+import { NavLink } from 'react-router-dom';
 import { Button } from '../UI/button/Button';
 import { IProduct } from '../../types/types';
-import { NavLink } from 'react-router-dom';
 import cart from '../../img/icons/icon_cart.svg';
 import './ProductsListItem.css';
 
 interface ProductsListItemProps {
     product: IProduct,
     handleAdd: Function,
-    onClick?: Function
 }
 
-export const ProductsListItem: React.FC<ProductsListItemProps> = ({product, handleAdd, onClick}) => {
+export const ProductsListItem: React.FC<ProductsListItemProps> = ({product, handleAdd}) => {
     return (
         <div className="product">
             <img className="product__image" src={product.img} alt="img"/>
@@ -19,7 +18,6 @@ export const ProductsListItem: React.FC<ProductsListItemProps> = ({product, hand
                 <NavLink to={"/product/" + product.barcode}>
                     <h3 className="product__title">{product.name}</h3>
                 </NavLink>
-                {/* <h3 className="product__title" onClick={() => onClick(product)}>{product.name}</h3> */}
             </div>
             <div className="product__info">
                 <p><span>Штрихкод: </span>{product.barcode}</p>

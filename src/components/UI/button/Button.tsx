@@ -6,7 +6,6 @@ interface ButtonProps {
     shape: string,
     onClick?: MouseEventHandler<HTMLButtonElement>,
     type?: 'button'
-
 }
 
 export const Button: React.FC<ButtonProps> = ({children, shape, ...props}) => {

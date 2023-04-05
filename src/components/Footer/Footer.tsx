@@ -23,7 +23,6 @@ export const Footer = () => {
                             <InputText 
                                 imgType="arrow"
                                 placeholder="Введите ваш E-mail" 
-                                onChange={() => console.log('typing')}
                                 disabled/>
                         </label>
                     </div>

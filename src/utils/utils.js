@@ -20,6 +20,7 @@ export const filterProducts = (filterValue, filterType, arr) => {
         case 'min-price':
             return [...arr].filter(elem => Number(elem.price) >= Number(filterValue));
         case 'max-price':
+            if (Number(filterValue) == 0) return arr;
             return [...arr].filter(elem => Number(elem.price) <= Number(filterValue));
         case 'manufacturer':
             const newState = [];
@@ -30,7 +31,7 @@ export const filterProducts = (filterValue, filterType, arr) => {
                 );
             });
 
-            return newState.flat();
+            return newState.length > 0 ? newState.flat() : arr;
         default:
             return arr;
     }
@@ -48,4 +49,22 @@ export const getParamValues = (arr, param) => {
     });
 
     return [...set];
+}
+
+export const getPagesArray = (totalProducts, limit) => {
+    let totalPages = Math.ceil(totalProducts / limit);
+    let result = [];
+
+    for (let i = 0; i < totalPages; i++) {
+        result.push(i + 1)
+    }
+    
+    return result;
+}
+
+export const getProductsForPage = (page, productsLimit, products) => {
+    const firstIndx = (page - 1) * productsLimit;
+    const lastIndx = firstIndx + productsLimit;
+
+    return products.slice(firstIndx, lastIndx);
 }

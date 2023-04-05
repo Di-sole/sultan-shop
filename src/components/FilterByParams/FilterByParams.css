@@ -8,19 +8,3 @@
     font-weight: 500;
     line-height: 150%;
 }
-
-.wrapper_checkboxes {
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-}
-
-.wrapper_checkboxes label {
-    margin-bottom: 5px;
-    line-height: 150%;
-    color: #3f4e65;
-}
-
-.wrapper_checkboxes input {
-    margin-right: 10px;
-}

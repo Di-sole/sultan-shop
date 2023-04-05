@@ -1,26 +1,34 @@
-import { MouseEventHandler } from 'react';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import './CategoriesList.css';
 
 interface CategoriesListProps {
     listType: string, 
     categories: string[], 
-    handleClick: MouseEventHandler<HTMLLIElement>, 
+    selectedType: string,
+    handleClick: (e: any) => void, 
+    handleTitleClick?: () => void,
     title?: string
 }
 
-export const CategoriesList: React.FC<CategoriesListProps> = ({listType, categories, handleClick, title}) => {
-    const selectedType = useTypedSelector(state => state.sort.selectedSort);
-
+export const CategoriesList: React.FC<CategoriesListProps> = ({listType, categories, selectedType, handleClick, handleTitleClick, title}) => {
     return(
         <div className="categories">
-            <h3 className="categories__title">{title}</h3>
+            {title && 
+                <h3 
+                    className="categories__title"
+                    onClick={() => handleTitleClick()}
+                >
+                    {title}
+                </h3>
+            }
             
             <ul className={"categories_" + listType}>
                 {categories.map(value => 
                     <li 
                         key={value}
-                        onClick={handleClick}>{value}
+                        onClick={handleClick}
+                        className={selectedType == value ? "category__current" : ""}
+                    >
+                        {value}
                     </li>)}
             </ul>
         </div>
