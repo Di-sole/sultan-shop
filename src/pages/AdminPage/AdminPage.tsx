@@ -1,45 +1,42 @@
-import { Checkboxes } from "../../components/UI/Checkboxes/Checkboxes";
+import { useState } from "react";
+import { AdminProductsList } from "../../components/admin/AdminProductsList/AdminProductsList";
 import { Breadcrumbs } from "../../components/UI/breadcrumbs/Breadcrumbs";
+import { Modal } from "../../components/UI/Modal/Modal";
+import { AdminButton } from "../../components/UI/button/AdminButton";
+import { AdminForm } from "../../components/admin/AdminForm/AdminForm";
 import { IProduct } from "../../types/types";
 import json from "../../json";
 import './AdminPage.css';
-import { Modal } from "../../components/UI/Modal/Modal";
-import { useState } from "react";
-import { AdminButton } from "../../components/UI/button/AdminButton";
-import { AdminForm } from "../../components/admin/AdminForm/AdminForm";
 
 export const AdminPage = () => {
     const products: IProduct[] = localStorage.length == 0 ? JSON.parse(json) : JSON.parse(localStorage.products);
     if (localStorage.length === 0) localStorage.products = JSON.stringify(products);
 
-    const [modalEdit, setModalEdit] = useState(false);
-    const [modalAdd, setModalAdd] = useState(false);
-    const [editedProduct, setEditedProduct] = useState(null);
-    // const [currentList, setCurrentList] = useState(products);
+    const [editedProduct, setEditedProduct] = useState(null)
+
+    const [modal, setModal] = useState(false);
+    const [currentList, setCurrentList] = useState(products);
 
     const handleEdit = (product: IProduct) => {
         setEditedProduct(product);
-        setModalEdit(true);
+        setModal(true);
     }
 
     const handleDelete = (product: IProduct) => {
         const removed = products.find(p => p.barcode == product.barcode);
         const newState = products.filter(p => p != removed);
         localStorage.products = JSON.stringify(newState);
-        // setCurrentList(JSON.parse(localStorage.products));
+        setCurrentList(JSON.parse(localStorage.products));
     }
 
-    const handleCheckboxChange = () => {
+    const handleSubmit = () => {
+        const form = document.forms[0];
+        const selectedTypes: string[] = [];
+        Array.from(form.category.options).forEach((o: any) => {if (o.selected) selectedTypes.push(o.value)});
 
-    }
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-
-        const form = e.target.form
         const newProduct: IProduct = {
             id: form.barcode.value,
-            name: form.title.value,
+            name: form.prodName.value,
             img: form.img_url.value,
             size_type: form.size_type.value,
             size: form.size.value,
@@ -48,13 +45,24 @@ export const AdminPage = () => {
             brand: form.brand.value,
             description: form.description.value,
             price: form.price.value,
-            category: form.category.value
+            category: selectedTypes
         }
 
-        const newState = [...products];
-        newState.push(newProduct);
-        localStorage.products = JSON.stringify(newState);
+        let newState = [...products];
 
+        if (form.name === 'add') {
+            newState.push(newProduct);
+            localStorage.products = JSON.stringify(newState);
+        } 
+        
+        if (form.name === 'edit') {
+            const index = currentList.findIndex(p => p.barcode === editedProduct.barcode);
+            newState.splice(index, 1, newProduct)
+            localStorage.products = JSON.stringify(newState);
+        }
+
+        localStorage.products = JSON.stringify(newState);
+        setCurrentList(JSON.parse(localStorage.products));
         closeModals();
     }
 
@@ -63,8 +71,8 @@ export const AdminPage = () => {
     }
 
     const closeModals = () => {
-        setModalAdd(false);
-        setModalEdit(false);
+        setEditedProduct(null);
+        setModal(false);
     }
 
     return (
@@ -75,43 +83,16 @@ export const AdminPage = () => {
                     <div className="admin__products">
                         <div className="admin__header">
                             <h2 className="admin__list-title">Список товаров</h2>
-                            <AdminButton onClick={() => {setModalAdd(true)}}>Добавить товар</AdminButton>
+                            <AdminButton onClick={() => {setModal(true)}}>Добавить товар</AdminButton>
                         </div>
-                        
-                        <ul className="admin__list">
-                            {products.map(prod => 
-                                <li key={prod.barcode}>
-                                    <div className="admin__product">
-                                        <img className="admin__product-image" src={prod.img} alt="img"/>
-                                        <h3 className="admin__product-title">{prod.name}</h3>
-                                        <div className="admin__product-actions">
-                                            <AdminButton onClick={handleEdit}>
-                                                Редактировать
-                                            </AdminButton>
-                                            <AdminButton onClick={handleDelete}>
-                                                Удалить
-                                            </AdminButton>
-                                        </div>
-                                    </div>
-                                </li>
-                            )}
-                        </ul>
+                        <AdminProductsList products={products} handleEdit={handleEdit} handleDelete={handleDelete} />
                     </div>
                 </div>
             </div>
 
-            <Modal visible={modalAdd} setVisible={setModalAdd}>
+            <Modal visible={modal} setVisible={setModal}>
                 <AdminForm 
-                    product={null}
-                    formType="add"
-                    handleSubmit={handleSubmit}
-                    handleCancel={handleCancel} 
-                />
-            </Modal>
-            <Modal visible={modalEdit} setVisible={setModalEdit}>
-                <AdminForm 
-                    product={editedProduct}
-                    formType="edit"
+                    edited={editedProduct}
                     handleSubmit={handleSubmit}
                     handleCancel={handleCancel} 
                 />

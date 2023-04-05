@@ -11,7 +11,7 @@ export const AdminButton: React.FC<AdminButtonProps> = ({children, onClick, ...p
             {...props}
             className={classes.admin__btn}
             type="button"
-            onClick={(e) => onClick(e)}
+            onClick={() => onClick()}
         >
             {children}
         </button>

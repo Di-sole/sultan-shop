@@ -1,4 +1,4 @@
-import { ProductsAction, ProductsActionTypes } from "../../types/products"
+import { ProductsAction, ProductsActionTypes } from "../../types/products";
 
 export function sortProducts(payload: string): ProductsAction {
     return {

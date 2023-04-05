@@ -5,7 +5,7 @@
 }
 
 .admin__products {
-    width: 53%;
+    width: 63%;
 }
 
 .admin__header {
@@ -21,40 +21,4 @@
     font-size: 26px;
     font-weight: 500;
     text-transform: uppercase;
-}
-
-.admin__product {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    min-width: 200px;
-    padding: 20px;
-    margin-bottom: 10px;
-
-    border: 1px dotted rgba(63, 78, 101, 0.3);
-}
-
-.admin__product-image {
-    width: 100px;
-}
-
-.admin__product-title {
-    width: 48%;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.admin__product-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-}
-
-/* ----------------- */
-
-.admin__product-add {
-    width: 40%;
 }

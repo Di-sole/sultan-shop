@@ -9,7 +9,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({pathes}) => {
     return (
         <div className={classes.breadcrumbs}>
             <ul className={classes.breadcrumbs__list}>
-                <li><NavLink to="/sultan-shop/">Главная</NavLink></li>
+                <li><NavLink to="/sultan-shop/admin">Админка</NavLink></li>
                 {pathes.map(p => 
                     <li key={p.link}><NavLink to={p.link}>{p.name}</NavLink></li>
                 )}

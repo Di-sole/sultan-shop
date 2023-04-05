@@ -3,60 +3,54 @@ import { AdminButton } from "../../UI/button/AdminButton";
 import './AdminForm.css';
 
 interface AdminFormProps {
-    product: IProduct | null,
-    formType: "add" | "edit"
     handleSubmit: Function,
-    handleCancel: Function
+    handleCancel: Function,
+    edited?: IProduct | null
 }
 
-export const AdminForm: React.FC<AdminFormProps> = ({product, formType, handleSubmit, handleCancel}) => {
-    console.log(product)
+export const AdminForm: React.FC<AdminFormProps> = ({handleSubmit, handleCancel, edited}) => {
     return (
         <div className="form__wrapper">
-            <h2 className="admin__form-title">{formType === "add" ? "добавить товар" : "редактировать товар"}</h2>
-            <form className="admin__form">
+            <h2 className="admin__form-title">{edited ? "редактировать товар" : "добавить товар"}</h2>
+            <form className="admin__form" name={edited ? 'edit' : 'add'}>
                 <label>
                     <span>Название товара</span>
-                    <input type="text" name="name" id="name" value={product ? product.name : ''} required />
+                    <input type="text" name="prodName" id="prodName" defaultValue={edited?.name} required />
                 </label>
                 <label>
                     <span>URL изображения</span>
-                    <input type="text" name="img_url" id="img_url" value={product ? product.img: ''} required />
+                    <input type="text" name="img_url" id="img_url" defaultValue={edited?.img} required />
                 </label>
                 <label>
                     <span>Штрихкод</span>
-                    {formType === "add" 
-                        ? <input type="number" name="barcode" id="barcode" value={product ? product.barcode : ''} required />
-                        : <input type="number" name="barcode" id="barcode" value={product ? product.barcode : ''} disabled />
-                    }
-                    
+                    <input type="number" name="barcode" id="barcode" defaultValue={edited?.barcode} required />
                 </label>
                 <label className="label_select">
                     <span>Тип объема</span>
-                    <select name="size_type" id="size_type" value={product ? product.size_type : ''}>
+                    <select name="size_type" id="size_type">
                         <option value="г">грамм</option>
                         <option value="мл">миллилитр</option>
                     </select>
                 </label>
                 <label>
                     <span>Объем</span>
-                    <input type="number" name="size" id="size" value={product ? product.size : ''} required />
+                    <input type="number" name="size" id="size" defaultValue={edited?.size} required />
                 </label>
                 <label>
                     <span>Производитель</span>
-                    <input type="text" name="manufacturer" id="manufacturer" value={product ? product.manufacturer : ''} required />
+                    <input type="text" name="manufacturer" id="manufacturer" defaultValue={edited?.manufacturer} required />
                 </label>
                 <label>
                     <span>Бренд</span>
-                    <input type="text" name="brand" id="brand" value={product ? product.brand : ''} required />
+                    <input type="text" name="brand" id="brand" defaultValue={edited?.brand} required />
                 </label>
                 <label>
                     <span>Цена</span>
-                    <input type="number" name="price" id="price" value={product ? product.price : ''} required />
+                    <input type="number" name="price" id="price" defaultValue={edited?.price} required />
                 </label>
                 <label>
                     <span>Описание</span>
-                    <textarea name="description" id="description" rows={5}  value={product ? product.description : ''} required ></textarea>
+                    <textarea name="description" id="description" rows={5}  defaultValue={edited?.description} required></textarea>
                 </label>
                 <label className="label_select">
                     <span>Категория</span>
@@ -71,30 +65,12 @@ export const AdminForm: React.FC<AdminFormProps> = ({product, formType, handleSu
                         <option value="Дезодоранты, антиперспиранты">Дезодоранты, антиперспиранты</option>
                     </select>
                 </label>
-                {formType === "add" 
-                    ? <AdminButton onClick={handleSubmit}>Добавить товар</AdminButton>
-                    : <AdminButton onClick={handleSubmit}>Сохранить изменения</AdminButton>
+                {edited
+                    ? <AdminButton onClick={handleSubmit}>Сохранить изменения</AdminButton>
+                    : <AdminButton onClick={handleSubmit}>Добавить товар</AdminButton>
                 }
                 <AdminButton onClick={handleCancel}>Отмена</AdminButton>
             </form>
         </div>
     )
 }
-
-{/* <label className="label_select">
-    <span>Категория</span>
-    <Checkboxes 
-        valuesName="category" 
-        values={[
-            "Эпиляция и депиляция",
-            "Средства для ванны и душа",
-            "Гели для душа",
-            "Скрабы, пилинги",
-            "Мочалки и губки для тела",
-            "Интимный уход",
-            "Дезодоранты, антиперспиранты"
-        ]}
-        handleChange={handleCheckboxChange}
-        selected={[]}
-    />
-</label> */}
