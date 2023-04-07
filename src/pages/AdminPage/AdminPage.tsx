@@ -9,8 +9,8 @@ import json from "../../json";
 import './AdminPage.css';
 
 export const AdminPage = () => {
-    const products: IProduct[] = localStorage.length == 0 ? JSON.parse(json) : JSON.parse(localStorage.products);
-    if (localStorage.length === 0) localStorage.products = JSON.stringify(products);
+    const products: IProduct[] = localStorage.products ? JSON.parse(json) : JSON.parse(localStorage.products);
+    if (!localStorage) localStorage.products = JSON.stringify(products);
 
     const [editedProduct, setEditedProduct] = useState(null)
 
