@@ -10,7 +10,7 @@ import './AdminPage.css';
 
 export const AdminPage = () => {
     const products: IProduct[] = localStorage.products ? JSON.parse(json) : JSON.parse(localStorage.products);
-    if (!localStorage) localStorage.products = JSON.stringify(products);
+    if (!localStorage.products) localStorage.products = JSON.stringify(products);
 
     const [editedProduct, setEditedProduct] = useState(null)
 
