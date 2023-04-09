@@ -3,13 +3,13 @@ import './CategoriesList.css';
 interface CategoriesListProps {
     listType: string, 
     categories: string[], 
-    selectedType: string,
+    selectedCategory: string,
     handleClick: (e: any) => void, 
     handleTitleClick?: () => void,
     title?: string
 }
 
-export const CategoriesList: React.FC<CategoriesListProps> = ({listType, categories, selectedType, handleClick, handleTitleClick, title}) => {
+export const CategoriesList: React.FC<CategoriesListProps> = ({listType, categories, selectedCategory, handleClick, handleTitleClick, title}) => {
     return(
         <div className="categories">
             {title && 
@@ -26,7 +26,7 @@ export const CategoriesList: React.FC<CategoriesListProps> = ({listType, categor
                     <li 
                         key={value}
                         onClick={handleClick}
-                        className={selectedType == value ? "category__current" : ""}
+                        className={selectedCategory == value ? "category__current" : ""}
                     >
                         {value}
                     </li>)}

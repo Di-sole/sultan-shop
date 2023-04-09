@@ -3,7 +3,7 @@ import { Button } from "../UI/button/Button";
 import { Spoiler } from "../UI/spoiler/Spoiler";
 import { CountBar } from "../UI/CountBar/CountBar";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useAction } from "../../hooks/useActions";
+import { useActions } from "../../hooks/useActions";
 import { IProduct } from "../../types/types";
 import cart from "../../img/icons/icon_cart.svg";
 import "./ProductCard.css";
@@ -14,7 +14,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
     const selectedProducts = useTypedSelector(state => state.cart.selectedProducts);
-    const {increaseCount, addToCart} = useAction();
+    const { increaseCount, addToCart } = useActions();
     const [count, setCount] = useState<number>(1);
     
     const handleAdd = (product: IProduct) => {
@@ -52,11 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                             handleDecrease={handleDecrease} 
                             count={count}
                         />
-                        <Button 
-                            shape="big" 
-                            type="button" 
-                            onClick={() => handleAdd(product)}
-                        >
+                        <Button shape="big" type="button" onClick={() => handleAdd(product)}>
                             В корзину
                             <img src={cart} alt="" style={{marginLeft: "5px"}} />
                         </Button>

@@ -1,8 +1,8 @@
 import { FilterAction, FilterActionTypes } from "../../types/filter"
 
-export const setSelectedType = (payload: string): FilterAction => {
+export const setSelectedCategory = (payload: string): FilterAction => {
     return {
-        type: FilterActionTypes.SET_SELECTED_TYPE,
+        type: FilterActionTypes.SET_SELECTED_CATEGORY,
         payload: payload
     }
 }

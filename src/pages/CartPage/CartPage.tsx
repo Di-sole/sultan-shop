@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { PageHeader } from "../../components/PageHeader/PageHeader";
 import { CartList } from "../../components/CartList/CartList";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useAction } from "../../hooks/useActions";
 import { Modal } from "../../components/UI/Modal/Modal";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
 import './CartPage.css';
 
 export const CartPage: React.FC = () => {
     const products = useTypedSelector(state => state.cart.selectedProducts);
-    const { confirmPurchase } = useAction();
+    const { confirmPurchase } = useActions();
     const [modal, setModal] = useState(false);
 
     const handleConfirm = () => {

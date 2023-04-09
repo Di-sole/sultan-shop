@@ -13,7 +13,6 @@ export const AdminPage = () => {
     if (!localStorage.products) localStorage.products = JSON.stringify(products);
 
     const [editedProduct, setEditedProduct] = useState(null)
-
     const [modal, setModal] = useState(false);
     const [currentList, setCurrentList] = useState(products);
 
@@ -25,14 +24,15 @@ export const AdminPage = () => {
     const handleDelete = (product: IProduct) => {
         const removed = products.find(p => p.barcode == product.barcode);
         const newState = products.filter(p => p != removed);
+        console.log(newState)
         localStorage.products = JSON.stringify(newState);
         setCurrentList(JSON.parse(localStorage.products));
     }
 
     const handleSubmit = () => {
         const form = document.forms[0];
-        const selectedTypes: string[] = [];
-        Array.from(form.category.options).forEach((o: any) => {if (o.selected) selectedTypes.push(o.value)});
+        const selectedCategories: string[] = [];
+        Array.from(form.category.options).forEach((o: any) => {if (o.selected) selectedCategories.push(o.value)});
 
         const newProduct: IProduct = {
             id: form.barcode.value,
@@ -45,20 +45,18 @@ export const AdminPage = () => {
             brand: form.brand.value,
             description: form.description.value,
             price: form.price.value,
-            category: selectedTypes
+            category: selectedCategories
         }
 
         let newState = [...products];
 
         if (form.name === 'add') {
             newState.push(newProduct);
-            localStorage.products = JSON.stringify(newState);
         } 
         
         if (form.name === 'edit') {
             const index = currentList.findIndex(p => p.barcode === editedProduct.barcode);
             newState.splice(index, 1, newProduct)
-            localStorage.products = JSON.stringify(newState);
         }
 
         localStorage.products = JSON.stringify(newState);
@@ -85,7 +83,7 @@ export const AdminPage = () => {
                             <h2 className="admin__list-title">Список товаров</h2>
                             <AdminButton onClick={() => {setModal(true)}}>Добавить товар</AdminButton>
                         </div>
-                        <AdminProductsList products={products} handleEdit={handleEdit} handleDelete={handleDelete} />
+                        <AdminProductsList products={currentList} handleEdit={handleEdit} handleDelete={handleDelete} />
                     </div>
                 </div>
             </div>

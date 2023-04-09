@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { useAction } from "../../hooks/useActions";
+import { useActions } from "../../hooks/useActions";
 import { getProductsForPage } from "../../utils/utils";
 import { ProductsListItem } from "../ProductsListItem/ProductsListItem";
 import { Pagination } from "../UI/pagination/Pagination";
@@ -14,8 +13,7 @@ interface ProductsListProps {
 }
 
 export const ProductsList: React.FC<ProductsListProps> = ({products, productsLimit, page, handleAdd}) => {
-    const navigate = useNavigate();
-    const {setCurrentPage} = useAction();
+    const { setCurrentPage } = useActions();
 
     const productsForPage: IProduct[] = getProductsForPage(page, productsLimit, products);
 
@@ -30,7 +28,6 @@ export const ProductsList: React.FC<ProductsListProps> = ({products, productsLim
                     <ProductsListItem 
                         key={product.barcode} 
                         product={product}
-                        // onClick={(product: IProduct) => navigate('/product/' + product.barcode)}
                         handleAdd={handleAdd} />
                 )}
             </div>

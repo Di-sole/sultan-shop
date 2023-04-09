@@ -3,7 +3,7 @@ import { FilterAction, FilterActionTypes, FilterState } from "../../types/filter
 const initialState: FilterState = {
     selectedMinPrice: '',
     selectedMaxPrice: '',
-    selectedType: '',
+    selectedCategory: '',
     selectedParams: [],
 };
 
@@ -14,8 +14,8 @@ export function filterReducer(state = initialState, action: FilterAction): Filte
             return {...state, selectedMinPrice: action.payload};
         case FilterActionTypes.SET_SELECTED_MAX_PRICE:
             return {...state, selectedMaxPrice: action.payload};
-        case FilterActionTypes.SET_SELECTED_TYPE:
-            return {...state, selectedType: action.payload};
+        case FilterActionTypes.SET_SELECTED_CATEGORY:
+            return {...state, selectedCategory: action.payload};
         case FilterActionTypes.SET_SELECTED_PARAMS:
             const newParams: string[] = [...state.selectedParams];
             const index = state.selectedParams.indexOf(action.payload);
@@ -31,7 +31,7 @@ export function filterReducer(state = initialState, action: FilterAction): Filte
             return {
                 selectedMinPrice: '',
                 selectedMaxPrice: '',
-                selectedType: '',
+                selectedCategory: '',
                 selectedParams: [],
             }
         default:

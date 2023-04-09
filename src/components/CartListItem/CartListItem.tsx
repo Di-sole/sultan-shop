@@ -1,4 +1,4 @@
-import { useAction } from '../../hooks/useActions';
+import { useActions } from '../../hooks/useActions';
 import { Button } from '../UI/button/Button';
 import { CountBar } from '../UI/CountBar/CountBar';
 import { ISelectedProduct } from '../../types/types';
@@ -10,7 +10,7 @@ interface CartListItemProps {
 }
 
 export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
-    const {increaseCount, decreaseCount, removeFromCart} = useAction()
+    const {increaseCount, decreaseCount, removeFromCart} = useActions()
     
     const name: string = product.item.name.length > 50 
         ? product.item.name.slice(0, 50) + '...' 

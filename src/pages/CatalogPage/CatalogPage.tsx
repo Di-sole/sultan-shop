@@ -4,13 +4,13 @@ import { ProductsList } from "../../components/ProductsList/ProductsList";
 import { FiltersList } from "../../components/FiltersList/FiltersList";
 import { CategoriesList } from "../../components/CategoriesList/CategoriesList";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useAction } from "../../hooks/useActions";
+import { useActions } from "../../hooks/useActions";
 import { IProduct } from "../../types/types";
 import './CatalogPage.css';
 
 export const CatalogPage: React.FC = () => {
     const {selectedProducts} = useTypedSelector(state => state.cart);
-    const {selectedType} = useTypedSelector(state => state.filter);
+    const {selectedCategory} = useTypedSelector(state => state.filter);
     const {
         filtredAndSortedProducts, 
         categories,
@@ -19,14 +19,14 @@ export const CatalogPage: React.FC = () => {
     } = useTypedSelector(state => state.products);
     const {
         setSelectedSort, 
-        setSelectedType, 
+        setSelectedCategory, 
         clearFilter,
         sortProducts, 
         filterProducts, 
         resetProductsList,
         addToCart, 
         increaseCount
-    } = useAction();
+    } = useActions();
 
     const handleSortChange = (e: any) => {
         setSelectedSort(e.target.value);
@@ -34,7 +34,7 @@ export const CatalogPage: React.FC = () => {
     }
 
     const handleCategoryClick = (e: any) => {
-        setSelectedType(e.target.textContent);
+        setSelectedCategory(e.target.textContent);
         filterProducts({
             filter: e.target.textContent, 
             filterType: 'category'
@@ -78,7 +78,7 @@ export const CatalogPage: React.FC = () => {
                 <CategoriesList 
                     listType="top"
                     categories={categories}
-                    selectedType={selectedType}
+                    selectedCategory={selectedCategory}
                     handleClick={handleCategoryClick}
                 />
 
@@ -88,7 +88,7 @@ export const CatalogPage: React.FC = () => {
                         <CategoriesList 
                             listType="aside"
                             categories={categories}
-                            selectedType={selectedType}
+                            selectedCategory={selectedCategory}
                             handleClick={handleCategoryClick}
                             title="Уход за телом" 
                             handleTitleClick={handleCategoryTitleClick}
@@ -98,7 +98,8 @@ export const CatalogPage: React.FC = () => {
                         products={filtredAndSortedProducts} 
                         productsLimit={productsLimit}
                         page={currentPage}
-                        handleAdd={handleAdd}/>
+                        handleAdd={handleAdd}
+                    />
                 </div>
             </div>    
         </main>
