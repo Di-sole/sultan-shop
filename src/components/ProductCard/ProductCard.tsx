@@ -13,12 +13,12 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
-    const selectedProducts = useTypedSelector(state => state.cart.selectedProducts);
+    const productsInCart = useTypedSelector(state => state.cart.productsInCart);
     const { increaseCount, addToCart } = useActions();
     const [count, setCount] = useState<number>(1);
     
     const handleAdd = (product: IProduct) => {
-        const existed = selectedProducts.find(p => p.item.barcode == product.barcode);
+        const existed = productsInCart.find(p => p.item.barcode == product.barcode);
 
         if (existed) {
             for (let i = 0; i < count; i++) {

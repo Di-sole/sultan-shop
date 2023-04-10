@@ -5,10 +5,10 @@ import './CartWidget.css';
 
 export const CartWidget = () => {
     const total = useTypedSelector(state => state.cart.totalPrice);
-    const count = useTypedSelector(state => state.cart.selectedProducts).length;
+    const count = useTypedSelector(state => state.cart.productsInCart).length;
 
     return (
-        <NavLink to="/sultan-shop/cart">
+        <NavLink to="/sultan-shop/cart" data-testid="cart-link">
             <div className="cart-widget">
                 <div className="cart-widget__image">
                     <img src={cart_dark} alt="" />

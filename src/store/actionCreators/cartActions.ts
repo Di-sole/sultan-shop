@@ -1,14 +1,14 @@
 import { CartAction, CartActionTypes } from "../../types/cart"
-import { ISelectedProduct } from "../../types/types"
+import { IProductInCart } from "../../types/types"
 
-export const addToCart = (payload: ISelectedProduct): CartAction => {
+export const addToCart = (payload: IProductInCart): CartAction => {
     return {
         type: CartActionTypes.ADD_TO_CART,
         payload: payload
     }
 }
 
-export const removeFromCart = (payload: ISelectedProduct): CartAction => {
+export const removeFromCart = (payload: IProductInCart): CartAction => {
     return {
         type: CartActionTypes.REMOVE_FROM_CART,
         payload: payload
@@ -21,14 +21,14 @@ export const confirmPurchase = (): CartAction => {
     }
 }
 
-export const increaseCount = (payload: ISelectedProduct): CartAction => {
+export const increaseCount = (payload: IProductInCart): CartAction => {
     return {
         type: CartActionTypes.INCREASE_PRODUCT_COUNT,
         payload: payload
     }
 }
 
-export const decreaseCount = (payload: ISelectedProduct): CartAction => {
+export const decreaseCount = (payload: IProductInCart): CartAction => {
     return {
         type: CartActionTypes.DECREASE_PRODUCT_COUNT,
         payload: payload

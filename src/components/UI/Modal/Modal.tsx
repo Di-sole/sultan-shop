@@ -3,10 +3,9 @@ import classes from './Modal.module.css';
 interface ModalProps {
     children: any,
     visible: boolean,
-    setVisible: Function
 }
 
-export const Modal: React.FC<ModalProps> = ({children, visible, setVisible}) => {
+export const Modal: React.FC<ModalProps> = ({children, visible}) => {
     const modalClasses = [classes.modal]
 
     if (visible) {
@@ -14,7 +13,7 @@ export const Modal: React.FC<ModalProps> = ({children, visible, setVisible}) => 
     }
 
     return (
-        <div className={modalClasses.join(' ')}>
+        <div className={modalClasses.join(' ')} data-testid="modal">
             <div className={classes.modal__content}>
                 {children}
             </div>

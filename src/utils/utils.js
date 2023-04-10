@@ -1,5 +1,5 @@
-export const sortProducts = (sortValue, arr) => {
-    switch (sortValue) {
+export const sortProducts = (sortingType, arr) => {
+    switch (sortingType) {
         case 'name_ascending':
             return [...arr].sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
         case 'name_descending':

@@ -16,6 +16,7 @@ export const Pagination: React.FC<PaginationProps> = ({totalProducts, limit, pag
             {pagesArray.map(p =>
                 <span
                     key={p}
+                    data-testid="page-btn"
                     // повесить на страницы слушателя, и при нажатии на них, менять страницу в состоянии
                     onClick={(e) => changePage(e)}
                     // если текущий элемент итерации совпадает с тем, что хранится в состоянии,

@@ -1,12 +1,12 @@
 import { useActions } from '../../hooks/useActions';
 import { Button } from '../UI/button/Button';
 import { CountBar } from '../UI/CountBar/CountBar';
-import { ISelectedProduct } from '../../types/types';
+import { IProductInCart } from '../../types/types';
 import clear from '../../img/icons/icon_clear.svg';
 import './CartListItem.css';
 
 interface CartListItemProps {
-    product: ISelectedProduct
+    product: IProductInCart
 }
 
 export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
@@ -31,7 +31,7 @@ export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
         }
     }
 
-    const handleRemove = (product: ISelectedProduct) => {
+    const handleRemove = (product: IProductInCart) => {
         removeFromCart(product);
     }
 

@@ -7,9 +7,11 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 import { IProduct } from "../../types/types";
 import './CatalogPage.css';
+import { Header } from "../../components/Header/Header";
+import { Footer } from "../../components/Footer/Footer";
 
 export const CatalogPage: React.FC = () => {
-    const {selectedProducts} = useTypedSelector(state => state.cart);
+    const {productsInCart} = useTypedSelector(state => state.cart);
     const {selectedCategory} = useTypedSelector(state => state.filter);
     const {
         filtredAndSortedProducts, 
@@ -47,7 +49,7 @@ export const CatalogPage: React.FC = () => {
     }
 
     const handleAdd = (product: IProduct) => {
-        const existed = selectedProducts.find(p => p.item.barcode == product.barcode);
+        const existed = productsInCart.find(p => p.item.barcode == product.barcode);
 
         if (existed) {
             increaseCount({item: product});
@@ -60,48 +62,52 @@ export const CatalogPage: React.FC = () => {
     }
 
     return (
-        <main>
-            <div className="container">
-                <PageHeader title="каталог" pathes={[{name: "Каталог", link: "/sultan-shop/"}]}>
-                    <SelectSorting 
-                        defaultValue="Название"
-                        onChange={handleSortChange}
-                        options={[
-                            {value: "name_ascending", name: "Название А-Я"},
-                            {value: "name_descending", name: "Название Я-А"},
-                            {value: "price_ascending", name: "Сначала дешевле"},
-                            {value: "price_descending", name: "Сначала дороже"},
-                        ]}
+        <>
+            <Header />
+            <main data-testid="catalog-page">
+                <div className="container">
+                    <PageHeader title="каталог" pathes={[{name: "Каталог", link: "/sultan-shop/"}]}>
+                        <SelectSorting 
+                            defaultValue="Название"
+                            onChange={handleSortChange}
+                            options={[
+                                {value: "name_ascending", name: "Название А-Я"},
+                                {value: "name_descending", name: "Название Я-А"},
+                                {value: "price_ascending", name: "Сначала дешевле"},
+                                {value: "price_descending", name: "Сначала дороже"},
+                            ]}
+                        />
+                    </PageHeader>
+
+                    <CategoriesList 
+                        listType="top"
+                        categories={categories}
+                        selectedCategory={selectedCategory}
+                        handleClick={handleCategoryClick}
                     />
-                </PageHeader>
 
-                <CategoriesList 
-                    listType="top"
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    handleClick={handleCategoryClick}
-                />
-
-                <div className="page-content">
-                    <div className="wrapper_filters">
-                        <FiltersList />
-                        <CategoriesList 
-                            listType="aside"
-                            categories={categories}
-                            selectedCategory={selectedCategory}
-                            handleClick={handleCategoryClick}
-                            title="Уход за телом" 
-                            handleTitleClick={handleCategoryTitleClick}
+                    <div className="page-content">
+                        <div className="wrapper_filters">
+                            <FiltersList />
+                            <CategoriesList 
+                                listType="aside"
+                                categories={categories}
+                                selectedCategory={selectedCategory}
+                                handleClick={handleCategoryClick}
+                                title="Уход за телом" 
+                                handleTitleClick={handleCategoryTitleClick}
+                            />
+                        </div>
+                        <ProductsList 
+                            products={filtredAndSortedProducts} 
+                            productsLimit={productsLimit}
+                            page={currentPage}
+                            handleAdd={handleAdd}
                         />
                     </div>
-                    <ProductsList 
-                        products={filtredAndSortedProducts} 
-                        productsLimit={productsLimit}
-                        page={currentPage}
-                        handleAdd={handleAdd}
-                    />
-                </div>
-            </div>    
-        </main>
+                </div>    
+            </main>
+            <Footer />
+        </>
     )
 }

@@ -1,7 +1,7 @@
-import { ISelectedProduct } from "./types";
+import { IProductInCart } from "./types";
 
 export interface CartState {
-    selectedProducts: ISelectedProduct[],
+    productsInCart: IProductInCart[],
     totalPrice: number
 }
 
@@ -21,12 +21,12 @@ export type CartAction = AddToCartAction
 
 interface AddToCartAction {
     type: CartActionTypes.ADD_TO_CART,
-    payload: ISelectedProduct
+    payload: IProductInCart
 }
 
 interface RemoveFromCartAction {
     type: CartActionTypes.REMOVE_FROM_CART,
-    payload: ISelectedProduct
+    payload: IProductInCart
 }
 
 interface ConfirmPurchaseAction {
@@ -35,10 +35,10 @@ interface ConfirmPurchaseAction {
 
 interface IncreaseCountAction {
     type: CartActionTypes.INCREASE_PRODUCT_COUNT,
-    payload: ISelectedProduct
+    payload: IProductInCart
 }
 
 interface DecreaseCountAction {
     type: CartActionTypes.DECREASE_PRODUCT_COUNT,
-    payload: ISelectedProduct
+    payload: IProductInCart
 }

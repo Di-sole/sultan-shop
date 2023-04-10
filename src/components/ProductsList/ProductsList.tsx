@@ -12,7 +12,7 @@ interface ProductsListProps {
     handleAdd: Function
 }
 
-export const ProductsList: React.FC<ProductsListProps> = ({products, productsLimit, page, handleAdd}) => {
+export const ProductsList: React.FC<ProductsListProps> = ({products, productsLimit = 100, page, handleAdd}) => {
     const { setCurrentPage } = useActions();
 
     const productsForPage: IProduct[] = getProductsForPage(page, productsLimit, products);

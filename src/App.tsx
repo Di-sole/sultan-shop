@@ -10,18 +10,13 @@ import './styles/App.css';
 function App() {
   return (
     <div className="wrapper">
-      <Header />
-
       <Routes>
-          <Route path="/sultan-shop" element={<CatalogPage />} />
+          <Route path="/sultan-shop/" element={<CatalogPage />} />
           <Route path="/sultan-shop/cart" element={<CartPage />} />
           <Route path="/sultan-shop/product/:barcode" element={<ProductCardPage />} />
           <Route path="/sultan-shop/admin" element={<AdminPage />} />
       </Routes>
-      
-      <Footer />
     </div> 
-    
   );
 }
 

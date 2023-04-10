@@ -1,11 +1,11 @@
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { CartListItem } from '../CartListItem/CartListItem';
 import { Button } from '../UI/button/Button';
-import { ISelectedProduct } from '../../types/types';
+import { IProductInCart } from '../../types/types';
 import './CartList.css';
 
 interface CartListProps {
-    products: ISelectedProduct[], 
+    products: IProductInCart[], 
     handleConfirm: Function
 }
 

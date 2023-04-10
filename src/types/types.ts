@@ -12,7 +12,7 @@ export interface IProduct {
     category: string[]
 }
 
-export interface ISelectedProduct {
+export interface IProductInCart {
     item: IProduct,
     count?: string | number
 }
