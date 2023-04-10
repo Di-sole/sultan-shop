@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithReduxAndRouter } from '../../../tests/helpers/renderWithReduxAndRouter';
+import { renderWithReduxAndRouter } from '../../../test/helpers/renderWithReduxAndRouter';
 
 describe('products list test', () => {
     beforeEach(() => renderWithReduxAndRouter());

@@ -1,6 +1,6 @@
 import { screen, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import { renderWithReduxAndRouter } from '../../../tests/helpers/renderWithReduxAndRouter';
+import { renderWithReduxAndRouter } from '../../../test/helpers/renderWithReduxAndRouter';
 
 describe('Router test', () => {
     beforeEach(() => renderWithReduxAndRouter());
