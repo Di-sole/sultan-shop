@@ -48,7 +48,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                     <h3 className="product-card__title">{product.name}</h3>
                     <p className="product-card__size">{product.size} {product.size_type}</p>
                     <div className="product-card__actions">
-                        <p className="product-card__price">{Number(product.price) * count} ₽</p>
+                        <p data-testid="price-value" className="product-card__price">{Number(product.price) * count} ₽</p>
                         <CountBar 
                             handleIncrease={handleIncrease} 
                             handleDecrease={handleDecrease} 

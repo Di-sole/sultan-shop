@@ -11,15 +11,22 @@ export const CountBar: React.FC<CountBarProps> = ({handleIncrease, handleDecreas
     return (
         <div className={classes.bar}>
             <button
+                data-testid="decrease-btn"
                 className={classes.count_btn}
                 type="button" 
                 onClick={() => handleDecrease(count)}>
                 <span>-</span>
             </button>
 
-            <span className={classes.value}>{count}</span>
+            <span 
+                data-testid="countbar-value" 
+                className={classes.value}
+            >
+                    {count}
+            </span>
 
             <button 
+                data-testid="increase-btn"
                 className={classes.count_btn}
                 type="button" 
                 onClick={() => handleIncrease(count)}>
