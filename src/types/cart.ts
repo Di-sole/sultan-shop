@@ -11,6 +11,7 @@ export enum CartActionTypes {
     CONFIRM_PURCHASE = 'CONFIRM_PURCHASE',
     INCREASE_PRODUCT_COUNT = 'INCREASE_PRODUCT_COUNT',
     DECREASE_PRODUCT_COUNT = 'DECREASE_PRODUCT_COUNT',
+    UPDATE_TOTAL_PRICE = 'UPDATE_TOTAL_PRICE',
 }
 
 export type CartAction = AddToCartAction
@@ -18,6 +19,7 @@ export type CartAction = AddToCartAction
     | ConfirmPurchaseAction
     | IncreaseCountAction
     | DecreaseCountAction
+    | UpdateTotalPrice
 
 interface AddToCartAction {
     type: CartActionTypes.ADD_TO_CART,
@@ -41,4 +43,8 @@ interface IncreaseCountAction {
 interface DecreaseCountAction {
     type: CartActionTypes.DECREASE_PRODUCT_COUNT,
     payload: IProductInCart
+}
+
+interface UpdateTotalPrice {
+    type: CartActionTypes.UPDATE_TOTAL_PRICE
 }

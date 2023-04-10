@@ -34,3 +34,9 @@ export const decreaseCount = (payload: IProductInCart): CartAction => {
         payload: payload
     }
 }
+
+export const updateTotalPrice = (): CartAction => {
+    return {
+        type: CartActionTypes.UPDATE_TOTAL_PRICE
+    }
+}

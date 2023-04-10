@@ -14,7 +14,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
     const productsInCart = useTypedSelector(state => state.cart.productsInCart);
-    const { increaseCount, addToCart } = useActions();
+    const { increaseCount, addToCart, updateTotalPrice } = useActions();
     const [count, setCount] = useState<number>(1);
     
     const handleAdd = (product: IProduct) => {
@@ -27,6 +27,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
         } else {
             addToCart({item: product, count: count});
         }
+
+        updateTotalPrice();
     }
 
     const handleIncrease = (count: number) => {

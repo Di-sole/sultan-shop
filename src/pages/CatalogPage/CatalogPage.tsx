@@ -27,7 +27,8 @@ export const CatalogPage: React.FC = () => {
         filterProducts, 
         resetProductsList,
         addToCart, 
-        increaseCount
+        increaseCount,
+        updateTotalPrice
     } = useActions();
 
     const handleSortChange = (e: any) => {
@@ -59,6 +60,8 @@ export const CatalogPage: React.FC = () => {
                 count: 1
             });
         }
+
+        updateTotalPrice()
     }
 
     return (

@@ -11,36 +11,29 @@ export function cartReducer(state = initialState, action: CartAction): CartState
         case CartActionTypes.ADD_TO_CART:
             const newProds: IProductInCart[] = [...state.productsInCart];
             newProds.push(action.payload);
-            
-            return {
-                productsInCart: newProds, 
-                totalPrice: Number(state.totalPrice) + (Number(action.payload.item.price) * Number(action.payload.count))
-            };
+            return {...state, productsInCart: newProds};
 
         case CartActionTypes.REMOVE_FROM_CART:
-            const removed: IProductInCart = [...state.productsInCart].find(p => p.item.barcode == action.payload.item.barcode);
+            const removed: IProductInCart = state.productsInCart.find(p => p.item.barcode == action.payload.item.barcode);
             const cleansedProds = [...state.productsInCart].filter(p => p != removed);
-        
-            return {
-                productsInCart: cleansedProds, 
-                totalPrice: Number(state.totalPrice) - (Number(removed.item.price) * Number(removed.count))
-            };
+            return {...state, productsInCart: cleansedProds};
 
         case CartActionTypes.INCREASE_PRODUCT_COUNT:
             const incState = {...state}
-            incState.totalPrice += Number(action.payload.item.price);
             const incProduct: IProductInCart = incState.productsInCart.find(p => p.item.barcode == action.payload.item.barcode);
             incProduct.count = Number(incProduct.count) + 1;
-
             return incState;
 
         case CartActionTypes.DECREASE_PRODUCT_COUNT:
             const decState = {...state}
-            decState.totalPrice -= Number(action.payload.item.price);
             const decProduct: IProductInCart = decState.productsInCart.find(p => p.item.barcode == action.payload.item.barcode);
             decProduct.count = Number(decProduct.count) - 1;
-
             return decState;
+
+        case CartActionTypes.UPDATE_TOTAL_PRICE:
+            let newTotal = 0;
+            state.productsInCart.forEach(p => newTotal += Number(p.item.price) * Number(p.count));
+            return {...state, totalPrice: newTotal}
 
         case CartActionTypes.CONFIRM_PURCHASE:
             return {

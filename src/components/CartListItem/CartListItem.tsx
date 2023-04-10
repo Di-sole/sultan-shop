@@ -10,7 +10,7 @@ interface CartListItemProps {
 }
 
 export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
-    const {increaseCount, decreaseCount, removeFromCart} = useActions()
+    const {increaseCount, decreaseCount, removeFromCart, updateTotalPrice} = useActions()
     
     const name: string = product.item.name.length > 50 
         ? product.item.name.slice(0, 50) + '...' 
@@ -21,6 +21,7 @@ export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
 
     const handleIncrease = () => {
         increaseCount(product);
+        updateTotalPrice();
     }
 
     const handleDecrease = (count: number | string) => {
@@ -29,10 +30,13 @@ export const CartListItem: React.FC<CartListItemProps> = ({product}) => {
         } else {
             removeFromCart(product);
         }
+
+        updateTotalPrice();
     }
 
     const handleRemove = (product: IProductInCart) => {
         removeFromCart(product);
+        updateTotalPrice();
     }
 
     return (
