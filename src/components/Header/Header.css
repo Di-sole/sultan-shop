@@ -67,3 +67,13 @@ ul li:last-child {
         padding: 15px 0;
     }
 }
+
+@media (max-width: 700px) {
+    .header__logo {
+        width: 120px;
+    }
+
+    .navigation__list_header li {
+        margin-right: 30px;
+    }
+}
