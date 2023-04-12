@@ -6,11 +6,11 @@ describe('Product page', () => {
         await expect(ProductPage.countEl).toBeExisting();
     });
 
-    // it('should increase and decrease product count', async () => {
-    //     await ProductPage.open();
-    //     await ProductPage.increaseCount();
-    //     await expect(ProductPage.countEl).toHaveTextContent('2');
-    // })
+    it('should increase and decrease product count', async () => {
+        await ProductPage.open();
+        await ProductPage.increaseCount();
+        await expect(ProductPage.countEl).toHaveTextContent('2');
+    })
 })
 
 
